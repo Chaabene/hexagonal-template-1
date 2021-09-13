@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet author="aymen" id="4">
+        <addColumn tableName="user">
+            <column name="age" type="int4"/>
+        </addColumn>
+        <addColumn tableName="user">
+            <column name="email" type="VARCHAR(255)"/>
+        </addColumn>
+        <addColumn tableName="user">
+            <column name="password" type="VARCHAR(255)"/>
+        </addColumn>
+
+        <addColumn tableName="user_aud">
+            <column name="age" type="INTEGER"/>
+        </addColumn>
+        <addColumn tableName="user_aud">
+            <column name="age_mod" type="BOOLEAN"/>
+        </addColumn>
+        <addColumn tableName="user_aud">
+            <column name="email" type="VARCHAR(255)"/>
+        </addColumn>
+        <addColumn tableName="user_aud">
+            <column name="email_mod" type="BOOLEAN"/>
+        </addColumn>
+        <addColumn tableName="user_aud">
+            <column name="password" type="VARCHAR(255)"/>
+        </addColumn>
+        <addColumn tableName="user_aud">
+            <column name="password_mod" type="BOOLEAN"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,72 @@
+version: "3.9"
+services: 
+  restapi:
+    container_name: restapi
+    build: 
+      context: ./api-rest
+      dockerfile: Dockerfile
+    depends_on: 
+      db:
+        condition: service_healthy
+    restart: on-failure
+    ports: 
+      - '8080:8080'
+    #environment:
+      #- SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/elisdb
+      #- SPRING_DATASOURCE_USERNAME=aymen
+      #- SPRING_DATASOURCE_PASSWORD=secret
+      #- DATABSE_URL=jdbc:postgresql://db:5432/elisdb
+    env_file:
+      - restapi.env
+    networks: 
+     - restapi-network
+    volumes: 
+      - ./logs:${LOGGING_FILE_PATH}
+  db:
+    container_name: db
+    image: postgres
+    volumes:
+      - './postgres-db-data:/var/lib/postgresql/data'     
+    ports:
+      - '5432:5432'
+    stdin_open: true
+    tty: true
+    env_file:
+      - database.env
+    healthcheck:
+      test: "exit 0"
+    networks: 
+      restapi-network:
+        ipv4_address: 172.16.238.10 
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    ports:
+      - '90:80'
+    env_file:
+      - pgAdmin.env
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    networks: 
+      - pgadmin-network
+
+volumes:
+    pgadmin-data:
+  
+networks: 
+  pgadmin-network:
+    driver: bridge
+  restapi-network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.238.0/24
+          gateway: 172.16.238.1
+
+
+
+#$ docker inspect poc-elis_postgres-container_1 -f "{{json .NetworkSettings.Networks }}"
+#docker exec -it <container_id/container_name> psql -U <user_name> <database_name>
+#$ docker inspect postgres-container -f "{{json .NetworkSettings.Networks }}" get ip adress

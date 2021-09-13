@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet author="aymen" id="3">
+        <createSequence sequenceName="hibernate_sequence"/>
+        <createTable tableName="revinfo">
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtstmp" type="BIGINT"/>
+        </createTable>
+
+        <createTable tableName="user_aud">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="address" type="VARCHAR(255)"/>
+            <column name="address_mod" type="BOOLEAN"/>
+            <column name="username" type="VARCHAR(255)"/>
+            <column name="username_mod" type="BOOLEAN"/>
+        </createTable>
+        <addPrimaryKey columnNames="rev" constraintName="revinfo_pkey" tableName="revinfo"/>
+        <addPrimaryKey columnNames="id, rev" constraintName="user_aud_pkey" tableName="user_aud"/>
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="user_aud"
+                                 constraintName="fk_user_aud_revinfo"
+                                 referencedColumnNames="rev" referencedTableName="revinfo"/>
+    </changeSet>
+</databaseChangeLog>

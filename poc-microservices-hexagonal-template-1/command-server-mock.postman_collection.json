@@ -1,0 +1,76 @@
+{
+	"info": {
+		"_postman_id": "07fd57e4-08c9-4b91-bb5a-816df34803b0",
+		"name": "command-server-mock",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "commands/{{idUser}}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/commands/{{idUser}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"commands",
+						"{{idUser}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/commands/{{idUser}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"commands",
+								"{{idUser}}"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "[{\n\"idCommand\":1,\n\"idUser\":{{idUser}},\n\"article\":\"pull\",\n\"prix\":50.26\n},\n{\n\"idCommand\":2,\n\"idUser\":{{idUser}},\n\"article\":\"jeans\",\n\"prix\":60.99\n}]"
+				}
+			]
+		}
+	]
+}
